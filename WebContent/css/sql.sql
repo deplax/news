@@ -1,0 +1,37 @@
+CREATE TABLE article(
+	aid SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	uid VARCHAR(128) NOT NULL, 
+	title VARCHAR(20),
+	contents LONGTEXT(20),
+	catagory VARCHAR(64),
+	lasttime DATETIME,
+	comment SMALLINT UNSIGNED,
+	PRIMARY KEY (aid)
+);
+
+CREATE TABLE comment(
+	cid SMALLINT UNSIGNED NOT NULL,
+	aid SMALLINT UNSIGNED NOT NULL,
+	uid VARCHAR(128) NOT NULL,
+	contents TEXT,
+	lasttime DATETIME,
+	comment SMALLINT UNSIGNED,
+	indent TINYINT UNSIGNED,
+	PRIMARY KEY (cid)
+);
+
+CREATE TABLE user(
+	uid VARCHAR(128) NOT NULL,
+	password VARCHAR(256) NOT NULL,
+	name VARCHAR(32),
+	PRIMARY KEY (uid)
+);
+
+ALTER TABLE article
+ADD FOREIGN KEY (uid) REFERENCES user (uid);
+
+ALTER TABLE comment
+ADD FOREIGN KEY (uid) REFERENCES user (uid);
+
+ALTER TABLE comment
+ADD FOREIGN KEY (aid) REFERENCES article (aid);
