@@ -1,14 +1,17 @@
+
+DROP TABLE IF EXISTS article;
 CREATE TABLE article(
 	aid SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	uid VARCHAR(128) NOT NULL, 
+	uid VARCHAR(128) NOT NULL,
+	caid SMALLINT UNSIGNED NOT NULL,
 	title VARCHAR(20),
-	contents LONGTEXT(20),
-	catagory VARCHAR(64),
+	contents TEXT(20),
 	lasttime DATETIME,
 	comment SMALLINT UNSIGNED,
 	PRIMARY KEY (aid)
 );
 
+DROP TABLE IF EXISTS comment;
 CREATE TABLE comment(
 	cid SMALLINT UNSIGNED NOT NULL,
 	aid SMALLINT UNSIGNED NOT NULL,
@@ -20,11 +23,19 @@ CREATE TABLE comment(
 	PRIMARY KEY (cid)
 );
 
+DROP TABLE IF EXISTS user;
 CREATE TABLE user(
 	uid VARCHAR(128) NOT NULL,
 	password VARCHAR(256) NOT NULL,
 	name VARCHAR(32),
 	PRIMARY KEY (uid)
+);
+
+DROP TABLE IF EXISTS catagory;
+CREATE TABLE catagory(
+	caid SMALLINT UNSIGNED NOT NULL,
+	catagory VARCHAR(64),
+	PRIMARY KEY (caid)
 );
 
 ALTER TABLE article
@@ -35,3 +46,17 @@ ADD FOREIGN KEY (uid) REFERENCES user (uid);
 
 ALTER TABLE comment
 ADD FOREIGN KEY (aid) REFERENCES article (aid);
+
+ALTER TABLE article 
+ADD FOREIGN KEY (caid) REFERENCES catagory (caid);
+
+CREATE DATABASE news;
+
+GRANT ALL ON news.* TO 'deplax'@'localhost' WITH GRANT OPTION;
+GRANT ALL ON news.* TO 'deplax'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES; 
+
+SELECT user, host, password FROM user;
+
+UPDATE user SET password=password('secret') WHERE user='deplax';
+
