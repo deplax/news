@@ -16,55 +16,59 @@
 			<div class="newslist">
 
 				<c:forEach var="list" items="${article}" varStatus="status">
-			<%--	<c:forEach var="index" begin="0" end="${article.size()}"> --%>
-				<c:set var="i" value="${index}" />  
-				<c:out value="${status.count}"/> 
-				<c:out value="${item.value}"/> 
-				<form action="/article/delete" >
-					<div class="jumbotron">
-						<div class="container">
-							<div class="news-title">
-								<h2>${list.getTitle()}</h2>
+					<%--	<c:forEach var="index" begin="0" end="${article.size()}"> --%>
+					<c:set var="i" value="${index}" />
+					<%--<c:out value="${status.count}"/> 
+				<c:out value="${item.value}"/> --%>
+					<form action="/article/delete">
+						<div class="jumbotron">
+							<div class="container">
+								<div class="news-title">
+									<h2>${list.getTitle()}[${list.getCaid()}]</h2>
 
-							</div>
-							<div class="news-control">
-								<button action="/" type="button" class="btn btn-default btn-sm">
-									<span class="glyphicon glyphicon-cog"></span>
-									<button type="submit" value="${list.getAid()}" name="aid" class="btn btn-default btn-sm">
-										<span class="glyphicon glyphicon-remove"></span>
-							</div>
-							<div class="news-contents">
-								<p>${list.getContents()}</p>
-							</div>
+								</div>
+								<div class="news-control">
+									<button action="/" type="button" class="btn btn-default btn-sm">
+										<span class="glyphicon glyphicon-cog"></span>
+										<button type="submit" value="${list.getAid()}" name="aid"
+											class="btn btn-default btn-sm">
+											<span class="glyphicon glyphicon-remove"></span>
+								</div>
+								<div class="news-contents">
+									<p>${list.getContents()}[${list.getLasttime()}]</p>
+								</div>
 
-							<!-- comment area -->
-							<div class="news-comment">
-								<div class="comment-indent"></div>
-								<div class="comment-name">쿠쿠</div>
-								<div class="comment-contents-box">
-									<div class="comment-contents">comment comment comment
-										comment comment comment comment comment comment comment
-									</div>
-									<div class="comment-control">
-										<button type="button" class="btn btn-default btn-ssm">
-											<span class="glyphicon glyphicon-chevron-down"></span>
+								<!-- comment area -->
+								<div class="news-comment">
+
+									<div class="comment-indent"></div>
+									<div class="comment-name">쿠쿠</div>
+									<div class="comment-contents-box">
+										<div class="comment-contents">comment comment comment
+											comment comment comment comment comment comment comment</div>
+										<div class="comment-control">
+											<form action="/comment/write" method="GET">
+												<button type="submit" value="${list.getAid()}" name="aid" class="btn btn-default btn-ssm">
+													<span class="glyphicon glyphicon-chevron-down"></span>
+											</form>
 											<button type="button" class="btn btn-default btn-ssm">
 												<span class="glyphicon glyphicon-cog"></span>
 												<button type="button" class="btn btn-default btn-ssm">
 													<span class="glyphicon glyphicon-remove"></span>
+										</div>
+
+										<div class="comment-form">
+											<input class="form-control input-sm" type="text"
+												placeholder="comment">
+										</div>
 									</div>
 
-									<div class="comment-form">
-										<input class="form-control input-sm" type="text"
-											placeholder="comment">
-									</div>
 								</div>
-							</div>
-							<!-- comment area -->
+								<!-- comment area -->
 
+							</div>
 						</div>
-					</div>
-				</form>
+					</form>
 				</c:forEach>
 
 				<div class="div-limit">

@@ -13,7 +13,7 @@ CREATE TABLE article(
 
 DROP TABLE IF EXISTS comment;
 CREATE TABLE comment(
-	cid SMALLINT UNSIGNED NOT NULL,
+	cid SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	aid SMALLINT UNSIGNED NOT NULL,
 	uid VARCHAR(128) NOT NULL,
 	contents TEXT,
@@ -32,9 +32,9 @@ CREATE TABLE user(
 );
 
 DROP TABLE IF EXISTS catagory;
-CREATE TABLE catagory(
+CREATE TABLE category(
 	caid SMALLINT UNSIGNED NOT NULL,
-	catagory VARCHAR(64),
+	category VARCHAR(64),
 	PRIMARY KEY (caid)
 );
 
@@ -48,7 +48,7 @@ ALTER TABLE comment
 ADD FOREIGN KEY (aid) REFERENCES article (aid);
 
 ALTER TABLE article 
-ADD FOREIGN KEY (caid) REFERENCES catagory (caid);
+ADD FOREIGN KEY (caid) REFERENCES category (caid);
 
 CREATE DATABASE news;
 

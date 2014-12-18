@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import net.news.article.Article;
+import net.news.article.Comment;
 import net.news.user.User;
 
 public class Database {
@@ -63,6 +64,30 @@ public class Database {
 			pstmt.setInt(2, article.getCaid());
 			pstmt.setString(3, article.getTitle());
 			pstmt.setString(4, article.getContents());
+
+			pstmt.executeUpdate();
+		} finally {
+			if (pstmt != null) {
+				pstmt.close();
+			}
+
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
+	
+	//insert into comment(cid, aid, uid, contents, lasttime, comment, indent) values(1, 3, 'ss@ss.ss', 'asdf', now(), 0, 0);
+	public void writeComment(Comment comment) throws SQLException {
+		String sql = "insert into comment(aid, uid, contents, lasttime, comment, indent) values(?, ?, ?, now(), 0, 0);";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, comment.getAid());
+			pstmt.setString(2, comment.getUid());
+			pstmt.setString(3, comment.getContents());
 
 			pstmt.executeUpdate();
 		} finally {

@@ -24,7 +24,7 @@ public class SignInServlet extends HttpServlet {
 			User.login(email, password);
 			HttpSession session = request.getSession();
 			session.setAttribute(SESSION_USER_ID, email);
-			response.sendRedirect("/");
+			response.sendRedirect("/article/factory");
 		}catch(Exception e){
 			e.printStackTrace();
 		}

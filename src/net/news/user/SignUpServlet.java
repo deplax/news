@@ -38,7 +38,7 @@ public class SignUpServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		resp.sendRedirect("/");
+		resp.sendRedirect("/article/factory");
 
 		PrintWriter writer = resp.getWriter();
 		writer.println(email);

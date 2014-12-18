@@ -45,7 +45,7 @@ public class WriteArticle extends HttpServlet {
 		//DB에 저장해야지
 		
 		
-		resp.sendRedirect("/");
+		resp.sendRedirect("/article/factory");
 	}
 	
 //	@Override
