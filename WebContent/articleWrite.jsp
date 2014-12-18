@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,20 +10,20 @@
 	<%@ include file="./commons/_nav.jspf"%>
 	<div class="write-form">
 
-		<form role="form">
+		<form role="form"  action="/article/write" method="post">
 			<div class="form-group">
-				Title<input type="text" class="form-control" placeholder="Title">
+				Title<input type="text" class="form-control" name="title" placeholder="Title">
 
-				Category<select class="form-control">
+				Category<select name="category" class="form-control">
 					<option>Select Category</option>
-					<option>정치</option>
-					<option>경제</option>
-					<option>사회</option>
-					<option>문화</option>
-					<option>미분류</option>
+					<option value=1>정치</option>
+					<option value=2>경제</option>
+					<option value=3>사회</option>
+					<option value=4>문화</option>
+					<option value=5>미분류</option>
 				</select> Article
-				<textarea class="form-control" rows="10"></textarea>
-				<button type="button" class="btn btn-default btn-align">write</button>
+				<textarea class="form-control" rows="10" name="contents"></textarea>
+				<button type="submit" class="btn btn-default btn-align">write</button>
 			</div>
 		</form>
 	</div>

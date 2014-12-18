@@ -19,6 +19,13 @@ public class Article {
 		this.comment = comment;
 	}
 	
+	public Article(String uid, int caid, String title, String contents){
+		this.uid = uid;
+		this.caid = caid;
+		this.title = title;
+		this.contents = contents;
+	}
+	
 	public int getAid() {
 		return aid;
 	}
